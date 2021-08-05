@@ -2,38 +2,11 @@ package main
 
 import (
 	"fmt"
-	
-	"os"
-	"strconv"
-	"strings"
+	"workFile"
 )
-func check(e error) {
-	if e != nil {
-		panic(e)
-	}
-}
-func getData(path string) []int {
-	f, err := os.Open(path)
-	check(err)
-	defer f.Close()
-	var stringRead = make([]byte, 1024)
-	f.Read(stringRead)
-	array1 := strings.Split(string(stringRead), " ")
-	l := 0
-	for array1[len(array1)-1][l] >= 48 && array1[len(array1)-1][l] <= 58 {
-		l++
-	}
-	array1[len(array1)-1] = array1[len(array1)-1][:l]
-	// fmt.Println(array1)
-	var array2 []int
-	for i := range array1 {
-		tmp, _ := strconv.Atoi(array1[i])
-		array2 = append(array2, tmp)
-	}
-	return array2
-}
-func ktSoTrongFile(x int, path string) bool{
-    arr := getData(path)
+
+func ktSoTrongFile(x int, arr []int) bool{
+    
 	for i:=range arr{
         if(x==arr[i]) {
 			return true
@@ -42,13 +15,19 @@ func ktSoTrongFile(x int, path string) bool{
 	return false
 }
 func main(){
-	pathFile := "file2.txt"
-	n := 5
+	a:=workFile.MyFile{
+		Path: "file1.txt",
+	}
+	arrInput := a.GetDataArrayNumber()
 	
-	if ktSoTrongFile(n, pathFile){
-		fmt.Println(n," co trong file ",pathFile)
+	var n int
+	fmt.Print("Ban muon tim n= ")
+	fmt.Scanf("%d", &n)
+	
+	if ktSoTrongFile(n, arrInput){
+		fmt.Println(n," co trong file ",a.Path)
 	}else{
-		fmt.Println(n," ko co trong file ",pathFile)
+		fmt.Println(n," ko co trong file ",a.Path)
 	}
 
 }
