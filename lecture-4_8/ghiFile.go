@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	
 )
 func check(err error){
 	if err!=nil{
@@ -10,8 +11,9 @@ func check(err error){
 	}
 }
 func main() {
-	f,err := os.Create("file1.txt")
+	f,err := os.Create("fileGhi.txt")
 	check(err)
-	f.Close()
+	f.WriteString("aaaaaaaa")
+	defer f.Close()
 	fmt.Println("oke")
 }
